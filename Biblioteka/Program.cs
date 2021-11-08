@@ -18,7 +18,7 @@ namespace Biblioteka
             var host = CreateHostBuilder(args).Build();
 
             //CreateDbIfNotExists(host);
-            AddData(host);
+            //AddData(host);
             Search(host);
 
             host.Run();
@@ -69,7 +69,7 @@ namespace Biblioteka
                 {
                     var context = services.GetRequiredService<BiblDbContext>();
                     Searches.SearchYear(context);
-                    Console.WriteLine("Atrasts: "+ Searches.SearchYear(context));
+                    Searches.SearchAuthors(context);
                 }
                 catch (Exception ex)
                 {

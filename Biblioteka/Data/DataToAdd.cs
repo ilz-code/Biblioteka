@@ -27,12 +27,7 @@ namespace Biblioteka.Data
                 new Autors{ Vards = "Bernārs Verbērs"},
                 new Autors{ Vards = "Marks Elperts"}
             };
-
-
-            //foreach (Autors a in context.Autors)
-
-            //    context.Autors.Remove(a);
-
+            
             foreach (Autors a in aut)
             {
                 context.Autors.Add(a);
