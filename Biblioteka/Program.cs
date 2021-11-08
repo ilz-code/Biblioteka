@@ -17,7 +17,9 @@ namespace Biblioteka
         {
             var host = CreateHostBuilder(args).Build();
 
-            CreateDbIfNotExists(host);
+            //CreateDbIfNotExists(host);
+            AddData(host);
+            Search(host);
 
             host.Run();
         }
@@ -31,6 +33,43 @@ namespace Biblioteka
                 {
                     var context = services.GetRequiredService<BiblDbContext>();
                     DbInitializer.Initialize(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred creating the DB.");
+                }
+            }
+        }
+
+        private static void AddData(IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<BiblDbContext>();
+                    DataToAdd.AditionalData(context);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred creating the DB.");
+                }
+            }
+        }
+
+        private static void Search(IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<BiblDbContext>();
+                    Searches.SearchYear(context);
+                    Console.WriteLine("Atrasts: "+ Searches.SearchYear(context));
                 }
                 catch (Exception ex)
                 {

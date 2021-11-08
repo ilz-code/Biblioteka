@@ -9,7 +9,6 @@ namespace Biblioteka.Models
     public class Autors
     {
         public int Id { get; set; }
-        public int AutorsId { get; set; }
         public string Vards { get; set; }
     }
 }
