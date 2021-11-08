@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Biblioteka.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteka.Data
@@ -32,14 +29,7 @@ namespace Biblioteka.Data
                 "JOIN Autors On Autors.Id = Gramatas.AutoraId " +
                 "WHERE Autors.Vards = 'A. Konans Doils'");
 
-            Console.WriteLine("Nosaukums\t\tAutors");
             Console.WriteLine(res);
-            //foreach (var gr in res)
-            //{
-            //    Console.WriteLine(gr.Nosaukums);
-            //}
-            Console.WriteLine();
-            
         }
     }
 }
