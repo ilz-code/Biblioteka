@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Biblioteka.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteka.Data
 {
@@ -26,6 +27,12 @@ namespace Biblioteka.Data
                 new Autors{ Vards = "Bernārs Verbērs"},
                 new Autors{ Vards = "Marks Elperts"}
             };
+
+
+            //foreach (Autors a in context.Autors)
+
+            //    context.Autors.Remove(a);
+
             foreach (Autors a in aut)
             {
                 context.Autors.Add(a);

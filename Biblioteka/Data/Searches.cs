@@ -20,12 +20,31 @@ namespace Biblioteka.Data
              //   "WHERE ")
         }
 
-        public static List<Gramata> SearchAuthors(BiblDbContext context)
+        public static void SearchAuthors(BiblDbContext context)
         {
             string autors;
-            List<Gramata> res = null;
+            var res = context.Gramatas.FromSqlRaw(
+                "SELECT * FROM Gramatas " +
+                "JOIN Autors On Gramatas.AutoraId = Autors.Id " +
+                "WHERE Autors.Vards = ");
+            //var res = from g in context.Gramatas
+            //    join a in context.Autors 
+            //        on g.AutoraId equals a.Id into dept
+            //    from department in dept.DefaultIfEmpty()
+            //    select new
+            //    {
+            //        Nosaukums = g.Nosaukums,
+            //        Autors = a.
+            //        Gads = g.Gads,
+            //        Lappuses = g.Lpp;
+            //    };
+            //Console.WriteLine("Employee Code\tEmployee Name\tDepartment Name");
+            //foreach (var data in leftOuterJoin)
+            //{
+            //    Console.WriteLine(data.EmployeeCode + "\t\t" + data.EmployeeName + "\t" + data.DepartmentName);
+            //}
             //context.Gramatas;
-            return res;
+            //return res;
         }
     }
 }
