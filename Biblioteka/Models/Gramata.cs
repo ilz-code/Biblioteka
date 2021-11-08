@@ -9,7 +9,7 @@ namespace Biblioteka.Models
     {
         public int Id { get; set; }
         public string Nosaukums { get; set; }
-        public string AutoraId { get; set; }
+        public int AutorsId { get; set; }
         public int Gads { get; set; }
         public int Lpp { get; set; }
     }
