@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Biblioteka.Models;
 
 namespace Biblioteka.Data
@@ -40,27 +37,27 @@ namespace Biblioteka.Data
             }
             context.SaveChanges();
 
-            var aut = new Autors[]
+            var aut = new Autors[12];
+
+            aut[0] = new Autors { Vards = "Aleksandrs Grīns" };
+            aut[1] = new Autors { Vards = "A. Dž. Kronins" };
+            aut[2] = new Autors { Vards = "Žils Verns" };
+            aut[3] = new Autors { Vards = "Franss G. Bengtsons" };
+            aut[4] = new Autors { Vards = "V. Kolinss" };
+            aut[5] = new Autors { Vards = "Raiders Hegards" };
+            aut[6] = new Autors { Vards = "A. Konans Doils" };
+            aut[7] = new Autors { Vards = "Gregorijs Deivids Robertss" };
+            aut[8] = new Autors { Vards = "Veronika Rota" };
+            aut[9] = new Autors { Vards = "Makss Forens" };
+            aut[10] = new Autors { Vards = "Bernārs Verbērs" };
+            aut[11] = new Autors { Vards = "Marks Elperts" };
+            
+            for (int i=0; i<12; i++)
             {
-                new Autors{Vards = "Aleksandrs Grīns"},
-                new Autors{Vards = "A. Dž. Kronins"},
-                new Autors{Vards = "Žils Verns"},
-                new Autors{Vards = "Franss G. Bengtsons"},
-                new Autors{ Vards = "Franss G. Bengtsons"},
-                new Autors{ Vards = "V. Kolinss"},
-                new Autors{ Vards = "Raiders Hegards"},
-                new Autors{Vards = "A. Konans Doils"},
-                new Autors{ Vards = "Gregorijs Deivids Robertss"},
-                new Autors{ Vards = "Veronika Rota"},
-                new Autors{ Vards = "Makss Forens"},
-                new Autors{ Vards = "Bernārs Verbērs"},
-                new Autors{ Vards = "Marks Elperts"}
-            };
-            foreach (Autors a in aut)
-            {
-                context.Autors.Add(a);
+                context.Autors.Add(aut[i]);
+                context.SaveChanges();
             }
-            context.SaveChanges();
+            
         }
     }
 }

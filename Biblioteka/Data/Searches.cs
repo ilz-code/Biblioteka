@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 
 namespace Biblioteka.Data
 {
@@ -12,7 +11,7 @@ namespace Biblioteka.Data
             var res = context.Gramatas.
                 Where(g => g.Gads == year);
             
-            Console.WriteLine("Nosaukums\tGads\tLappuses");
+            Console.WriteLine("Nosaukums\t\tGads\tLappuses");
             foreach (var gr in res)
             {
                 Console.WriteLine(gr.Nosaukums + "\t" + gr.Gads + "\t" + gr.Lpp);
@@ -22,14 +21,28 @@ namespace Biblioteka.Data
 
         public static void SearchAuthors(BiblDbContext context)
         {
-            string autors;
-            var res = context.Gramatas.FromSqlRaw(
-                "SELECT Gramatas.Nosaukums as Nosaukums, Autors.Vards as Vards " +
-                "FROM Gramatas " +
-                "JOIN Autors On Autors.Id = Gramatas.AutoraId " +
-                "WHERE Autors.Vards = 'A. Konans Doils'");
+            string autors = "A. Konans Doils";
+            
+            var res = (from gr in context.Gramatas
+                    join a in context.Autors
+                        on gr.AutoraId equals a.Id
+                       where a.Vards == autors
+                       select new
+                       {
+                          Id = gr.Id,
+                          Nosaukums = gr.Nosaukums,
+                          AutId = gr.AutoraId,
+                          Gads = gr.Gads,
+                          Lpp = gr.Lpp,
+                          Vards = a.Vards
+                       }).ToList();
 
-            Console.WriteLine(res);
+            Console.WriteLine("Nosaukums\t\tGads\tAutors");
+            foreach (var r in res)
+            {
+                Console.WriteLine(r.Nosaukums + "\t" + r.Gads + "\t" + r.Vards);
+            }
+            Console.WriteLine();
         }
     }
 }
