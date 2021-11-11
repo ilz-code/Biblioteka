@@ -9,10 +9,25 @@ namespace Biblioteka.Data
         {
             Console.WriteLine("Gads: ");
             int gads = Int32.Parse(Console.ReadLine());
-            var res = context.Gramatas.
-                Where(g => g.Gads == gads);
-            
-            Console.WriteLine("Nosaukums\t\tGads\tLappuses");
+
+            var res = (from gr in context.Gramatas
+                join a in context.Autors
+                    on gr.AutoraId equals a.Id
+                where gr.Gads == gads
+                select new
+                {
+                    Id = gr.Id,
+                    Nosaukums = gr.Nosaukums,
+                    AutId = gr.AutoraId,
+                    Gads = gr.Gads,
+                    Lpp = gr.Lpp,
+                    Vards = a.Vards
+                }).ToList();
+
+            //var res = context.Gramatas.
+            //    Where(g => g.Gads == gads);
+
+            Console.WriteLine("Nosaukums\t\tAutors\tGads\tLappuses");
             foreach (var gr in res)
             {
                 Console.WriteLine(gr.Nosaukums + "\t" + gr.Gads + "\t" + gr.Lpp);
@@ -39,7 +54,7 @@ namespace Biblioteka.Data
                           Vards = a.Vards
                        }).ToList();
 
-            Console.WriteLine("Nosaukums\t\tGads\tAutors");
+            Console.WriteLine("Nosaukums\t\tAutors\tGads\tLpp");
             foreach (var r in res)
             {
                 Console.WriteLine(r.Nosaukums + "\t" + r.Gads + "\t" + r.Vards);

@@ -63,14 +63,19 @@ namespace Biblioteka
                 try
                 {
                     var context = services.GetRequiredService<BiblDbContext>();
-                    Console.WriteLine(" Meklēt pēc:" +
-                                      "\n 1 -Autora" +
-                                      "\n 2 -Gada");
-                    var izv = Int32.Parse(Console.ReadLine());
-                    if (izv==2)
-                        Searches.SearchYear(context);
-                    if (izv==1)
-                        Searches.SearchAuthors(context);
+                    int izv; 
+                    do
+                    {
+                        Console.WriteLine(" Meklēt pēc:" +
+                                          "\n 1 -Autora" +
+                                          "\n 2 -Gada" +
+                                          "\n 3 -Beigt");
+                        izv = Int32.Parse(Console.ReadLine());
+                        if (izv == 2)
+                            Searches.SearchYear(context);
+                        if (izv == 1)
+                            Searches.SearchAuthors(context);
+                    } while (izv != 3);
 
                     Console.ReadKey();
                 }
