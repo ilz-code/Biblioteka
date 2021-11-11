@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Biblioteka.Models;
 
 namespace Biblioteka.Data
 {
@@ -23,14 +24,12 @@ namespace Biblioteka.Data
                     Lpp = gr.Lpp,
                     Vards = a.Vards
                 }).ToList();
-
-            //var res = context.Gramatas.
-            //    Where(g => g.Gads == gads);
-
-            Console.WriteLine("Nosaukums\t\tAutors\tGads\tLappuses");
-            foreach (var gr in res)
+            Console.WriteLine("Nosaukums" + new string(' ', 21) + "Autors" + new string(' ', 24) + "Gads   Lappuses");
+            foreach (var r in res)
             {
-                Console.WriteLine(gr.Nosaukums + "\t" + gr.Gads + "\t" + gr.Lpp);
+                int n1 = 30 - r.Nosaukums.Length;
+                int n2 = 30 - r.Vards.Length;
+                Console.WriteLine(r.Nosaukums + new string(' ', n1) + r.Vards + new string(' ', n2) + r.Gads + "   " + r.Lpp);
             }
             Console.WriteLine();
         }
@@ -39,6 +38,11 @@ namespace Biblioteka.Data
         {
             Console.WriteLine("Autors: ");
             string autors = Console.ReadLine();
+            foreach (Autors aut in context.Autors)
+            {
+                if (aut.Vards.Contains(autors))
+                    autors = aut.Vards;
+            }
             
             var res = (from gr in context.Gramatas
                     join a in context.Autors
@@ -54,10 +58,12 @@ namespace Biblioteka.Data
                           Vards = a.Vards
                        }).ToList();
 
-            Console.WriteLine("Nosaukums\t\tAutors\tGads\tLpp");
+            Console.WriteLine("Nosaukums" + new string(' ', 21) + "Autors" + new string(' ', 24) + "Gads   Lappuses");
             foreach (var r in res)
             {
-                Console.WriteLine(r.Nosaukums + "\t" + r.Gads + "\t" + r.Vards);
+                int n1 = 30 - r.Nosaukums.Length;
+                int n2 = 30 - r.Vards.Length;
+                Console.WriteLine(r.Nosaukums + new string(' ', n1) + r.Vards + new string(' ', n2) + r.Gads + "   " + r.Lpp);
             }
             Console.WriteLine();
         }
